@@ -1,0 +1,39 @@
+{
+  "name": "auto-cli",
+  "version": "1.0.0",
+  "description": "Front-end automation build tool integration",
+  "main": "index.js",
+  "bin": {
+    "scli": "cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Airfald/auto-cli.git"
+  },
+  "keywords": [
+    "js",
+    "node",
+    "cli"
+  ],
+  "author": "airfald",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Airfald/auto-cli/issues"
+  },
+  "homepage": "https://github.com/Airfald/auto-cli#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "colors": "^1.4.0",
+    "commander": "^6.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0"
+  }
+}
