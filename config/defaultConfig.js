@@ -1,33 +1,18 @@
 module.exports = {
-  wap: false,
-  package: "npm",
-  path: {
-    output: "dist/",
-    public: "/"
+  build: function () {
+      console.log('build')
   },
-  alias: {},
-  defineNamespace: void 0,
-  define: {},
-  provide: {},
-  plugin: {},
-  devServer: {
-    port: 9001,
-    https: false,
-    historyApiFallback: {
-      rewrites: []
-    },
-    proxy: {}
-    // proxy: {
-    //   "/api": {
-    //     target: "https://mzw.natappvip.cc",
-    //     changeOrigin: true,
-    //     secure: false
-    //   }
-    // }
+  publish: function () {
+      console.log('publish')
   },
-  mockServer: {
-    debug: false
+  devServer: function () {
+      console.log('devServer')
   },
-  publishRecursive: 1,
-  publish: {}
-};
+  testExtend: function () {
+      // 扩展命令，可以通过全局cli执行这个扩展脚本
+      console.log('extend')
+  },
+  config: {
+      envOptions: ['test', 'pre', 'prd'],
+  }
+}

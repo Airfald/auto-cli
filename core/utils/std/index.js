@@ -8,11 +8,6 @@ const success = require('./success');
 const createLabel = require('./tools/createLabel');
 const colors = require('./xtermcolors');
 
-// log("log message");
-// info("info message");
-// warn("warn message");
-// err("error message");
-
 module.exports = {
   log,
   info,

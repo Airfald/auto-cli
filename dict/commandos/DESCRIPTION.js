@@ -9,6 +9,7 @@ module.exports = {
   test            : "run UT and living preview test".cyan,
   build           : "run fast building project".green,
   publish         : "publish project optional".yellow,
+  extend          : "extend cli".yellow,
   upgrade         : "upgrade xcli core".red,
   setRemotePlugin : "[development] set plugin remote source git repository",
   link            : "[development] link plugin for xcli",

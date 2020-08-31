@@ -1,52 +1,46 @@
+/**
+ * build 打包构建，主要思路： 通过配置的环境进行选择选择执行相应配置文件的函数
+ */
+
+require('colors');
 const fs = require('fs');
 const fse = require('fs-extra');
-const colors = require('colors');
 const { isFunction } = require('lodash');
 const { prompt } = require('enquirer');
-const struct = require('ax-struct-js');
-const { packageJSON } = require('../../core/utils/abc');
 const paths = require('../../core/utils/paths');
 const { error, info } = require('../../core/utils/std');
 const COMMON = require('../../dict/commandos/COMMON');
+const { cliPlugin } = require('../../core/utils/entry');
 
-const packageAutoInstall = require('../../core/common/pre/packageAutoInstall');
-const checkAbcJSONFormat = require('../../core/common/pre/checkAbcJSONFormat');
-const getTargetEntryJS = require('../../core/common/pre/getTargetEntry');
+const checkPluginFormat = require('../../core/common/pre/checkPluginFormat');
 const createContext = require('../../core/common/aop/createContext');
 
-const _keys = struct.keys();
-const _has = struct.has();
-
 const buildCommand = async function(mode, command){
-  const prefixAbcJSON = checkAbcJSONFormat();
+  if(checkPluginFormat()){
+    const builder = cliPlugin.build;
+    const config = cliPlugin.config;
 
-  if(prefixAbcJSON){
-    let buildEntry = mode;
-    const isDebugMode = command ? !!command.debug : false;
-    const builder = await getTargetEntryJS(prefixAbcJSON.type, "build.js");
     const existsOutputDir = fs.existsSync(paths.currentOutputPath);
-    const buildOptions = _keys(prefixAbcJSON.define);
+    const envOptions = config.envOptions;
+    let buildEnv = '';
 
-    if(buildOptions.length && !_has(buildOptions, buildEntry)){
+    if(envOptions.length){
       const { entry } = await prompt({
         type: "select",
         name: "entry",
         message: "Choice build environment",
-        choices: buildOptions
+        choices: envOptions
       });
-      buildEntry = entry;
+      buildEnv = entry;
     }
 
-    if(existsOutputDir)
+    if(existsOutputDir) {
       await fse.remove(paths.currentOutputPath);
-
-    if(builder && !isDebugMode)
-      packageAutoInstall();
+    }
 
     if(isFunction(builder)){
-      const presetMsg = `${'[xcli]'.bold} ${('['+prefixAbcJSON.type+']').red.bold} ${('['+packageJSON.name+']').green.bold} `;
-      info(`${presetMsg}${"prepare building".green}`);
-      return builder(createContext({ buildEntry }), [isDebugMode]);
+      info(`${"prepare building".green}`);
+      return builder(createContext({ env: buildEnv, envOptions }));
     }
 
     return error(COMMON.ERROR_CANNOT_FIND_AOPSCRIPT_IMPLEMENT+` ${"build".bold}`);

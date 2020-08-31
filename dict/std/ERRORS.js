@@ -17,16 +17,8 @@ const prefixStdOutMsg = function(dict){
 };
 
 const ERROR = {
-  // abcJSON相关
-  abcJSON: {
-    notexist: "abc.json does not exist or it is not like JSON standard format",
-    notypeorname: "abc.json must exist (type) and (name) property",
-    notexistplugin: 'abc.json use plugin is not exist',
-    trytoinstallplugin: 'can not find abc.json typeof plugin, try to install ',
-    x_not_exist: 'plugin entry can not find ',
-    x_notas_jsonformat: 'plugin abcx.json is not standard JSON format',
-    x_not_empty: "plugin abcx.json can not be empty file",
-    x_not_passcheck: 'plugin abcx.json is a non-compliant file or missing the necessary fields'
+  cliPlugin: {
+    notexistplugin: 'plugin is not exist',
   },
 
   // cache缓存相关
@@ -42,7 +34,7 @@ const ERROR = {
 
 };
 
-const output = prefixStdOutMsg(ERROR);
+const output = ERROR;
 
 // console.log(output);
 module.exports = output;
