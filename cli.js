@@ -9,6 +9,7 @@ const build = require('./commandos/build');
 const dev = require('./commandos/dev');
 const publish = require('./commandos/publish');
 const extend = require('./commandos/extend');
+const plugin = require('./commandos/plugin');
 
 /*eslint-disable*/
 const logo =
@@ -46,6 +47,11 @@ cli.
 command('extend [extendName]').
 description(DESCRIPTION.extend).
 action(extend);
+
+cli.
+command('plugin [pluginName]').
+description(DESCRIPTION.plugin).
+action(plugin);
 
 cli.
   command('help').

@@ -4,7 +4,9 @@ const path = require('path');
 const currentPath = process.cwd();
 
 // cli-plugin 所在的路径
-const cliPluginPath = `${currentPath}/cli-plugin/index.js`;
+const cliPluginDirPath = `${currentPath}/cli-plugin`;
+
+const cliPluginPath = path.join(cliPluginDirPath, 'index.js');
 
 // 获取cli-plugin
 const cliPlugin = fs.existsSync(cliPluginPath) ? require(cliPluginPath) : null;
@@ -24,6 +26,7 @@ module.exports = {
   currentPath,
   packageJSON,
   cliPluginPath,
+  cliPluginDirPath,
   cliPlugin,
   cliPackageJSON,
 };

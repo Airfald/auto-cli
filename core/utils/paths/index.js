@@ -10,14 +10,13 @@ const currentOutputPath = prefixAbcJSON ? path.join(currentPath, prefixAbcJSON ?
 // 资源公共路径
 const currentPublicPath = path.join(currentPath, prefixAbcJSON ? prefixAbcJSON.path.public : "");
 
-// XCLI 目录的位置
+// CLI 目录的位置
 const cliRootPath = path.resolve(__dirname, "../../../");
 // 缓存文件 的位置
 const cacheFilePath = path.resolve(cliRootPath, '.cache');
 
 // plugins 目录的位置
 const pluginsPath = path.resolve(cliRootPath, 'plugins');
-const pluginsUsagePath = prefixAbcJSON ? path.resolve(cliRootPath, `plugins/${prefixAbcJSON.type}`) : null;
 
 const paths = {
   currentPath,
@@ -28,7 +27,6 @@ const paths = {
   cliRootPath,
   cacheFilePath,
   pluginsPath,
-  pluginsUsagePath,
 };
 
 module.exports = paths;

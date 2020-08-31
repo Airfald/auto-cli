@@ -6,7 +6,7 @@ const { error } = require('../../utils/std');
 const { cliPlugin } = require('../../utils/entry');
 const checkPluginExist = require('./checkPluginExist');
 
-const checkPluginFormat = function(){
+const checkPluginFormat = function(additional){
   const isPluginExist = checkPluginExist();
 
   if(!isPluginExist) {
@@ -29,6 +29,10 @@ const checkPluginFormat = function(){
 
   if (!publish) {
     return error('publish config not exist');
+  }
+
+  if (additional && (!cliPlugin['plugins'] || !cliPlugin['plugins'][additional])) {
+    return error(`${additional} config not exist`)
   }
 
   return true;
