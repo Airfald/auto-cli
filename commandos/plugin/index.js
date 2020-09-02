@@ -8,13 +8,14 @@ const fs = require('fs');
 const { isFunction } = require('lodash');
 const { error } = require('../../core/utils/std');
 const { pluginsPath } = require('../../core/utils/paths');
+const createContext = require('../../core/common/aop/createContext');
 
 const pluginCommand = async function(pluginName, command){
     const pluginFilePath = path.join(pluginsPath, pluginName, 'index.js')
 
     if (fs.existsSync(pluginFilePath)) {
         plugin = require(pluginFilePath);
-        isFunction(plugin) && plugin();
+        isFunction(plugin) && plugin(createContext());
         return
     }
 
